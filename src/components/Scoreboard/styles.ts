@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  padding: 0 10px;
-  margin: auto;
-  max-width: 350px;
-  height: 2rem;
-  display: flex;
   width: 100%;
-  justify-content: space-between;
+  display: flex;
+  height: 50px;
+  border-bottom: 1px solid #BBBBBB;
 `;
+
+export const Player = styled.div`
+  overflow: hidden;
+  width: 50%;
+
+`

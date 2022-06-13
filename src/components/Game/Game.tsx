@@ -1,9 +1,16 @@
+import { Container } from './styles';
 import { Scoreboard } from '../Scoreboard';
+import { Gameboard } from '../Gameboard';
+import { GameOptions } from '../GameOptions';
 
 export const Game = () => {
   return (
     <>
-      <Scoreboard />
+      <Container>
+        <Scoreboard />
+        <Gameboard />
+        <GameOptions />
+      </Container>
     </>
   );
 };
