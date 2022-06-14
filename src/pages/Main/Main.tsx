@@ -19,7 +19,7 @@ export const Main = () => {
   return (
     <>
       <Container>
-        {isLogged ? (
+        {!isLogged ? (
           <ChooseName isLogged={isLogged} setIsLogged={setIsLogged} />
         ) : (
           <Game />
