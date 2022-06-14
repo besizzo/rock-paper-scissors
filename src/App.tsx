@@ -1,5 +1,6 @@
 import { Main } from './pages/Main';
 import styled from '@emotion/styled';
+import { socket, SocketContext } from './socket';
 
 const Conatiner = styled.div`
   display: flex;
@@ -10,12 +11,12 @@ const Conatiner = styled.div`
   font-family: sans-serif;
 `;
 
-function App() {
-  return (
+const App = () => (
+  <SocketContext.Provider value={socket}>
     <Conatiner>
       <Main />
     </Conatiner>
-  );
-}
+  </SocketContext.Provider>
+);
 
 export default App;

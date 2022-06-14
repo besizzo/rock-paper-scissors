@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { GameText } from '../GameText';
 import rock from '../../shared/images/rock.png';
 import dots from '../../shared/images/dots.svg';
 import circle from '../../shared/images/dots-circle.svg';
@@ -18,23 +19,12 @@ const EnemyPick = styled.div`
   margin: auto;
 `;
 
-const GameText = styled.div`
-  /* background-color: grey; */
-  line-height: 80px;
-  text-align: center;
-`;
-
 export const Gameboard = () => {
   return (
     <Container>
       <Wrapper>
-        <GameText>waiting for another player</GameText>
+        <GameText />
         <EnemyPick>
-          {/* <img
-            src={rock}
-            alt="rock"
-            style={{ width: '200px', textAlign: 'center' }}
-          /> */}
           <img
             src={dots}
             alt="dots"
