@@ -1,6 +1,4 @@
 import { Container, Player } from './styles';
-// import dots from '../../shared/images/dots.svg';
-// import circle from '../../shared/images/dots-circle.svg';
 import { useStore } from 'effector-react';
 import $store from '../../store';
 

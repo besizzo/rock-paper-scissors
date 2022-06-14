@@ -1,6 +1,5 @@
 import { Main } from './pages/Main';
 import styled from '@emotion/styled';
-import { socket, SocketContext } from './socket';
 
 const Conatiner = styled.div`
   display: flex;
@@ -12,11 +11,9 @@ const Conatiner = styled.div`
 `;
 
 const App = () => (
-  <SocketContext.Provider value={socket}>
-    <Conatiner>
-      <Main />
-    </Conatiner>
-  </SocketContext.Provider>
+  <Conatiner>
+    <Main />
+  </Conatiner>
 );
 
 export default App;

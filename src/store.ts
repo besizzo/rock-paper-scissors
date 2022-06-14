@@ -19,25 +19,6 @@ interface Store {
   newPlayerName: string,
 };
 
-const addNewPlayer = (state: Store, newPlayer: string): Players => {
-  return state.players.playerOne.name === ''
-    ? {
-      playerOne: {
-        name: newPlayer,
-        score: 0,
-        choice: null
-      },
-      playerTwo: state.players.playerTwo
-    } : {
-      playerOne: state.players.playerOne,
-      playerTwo: {
-        name: newPlayer,
-        score: 0,
-        choice: null
-      },
-    }
-};
-
 const removePlayer = (state: Store, player: string): Players => {
   switch (true) {
     case (state.players.playerOne.name === player):
@@ -83,7 +64,6 @@ const addPlayers = (state: Store, players: string[]): Players => {
 }
 
 const editScore = (players: Players, choices: { username: string, choice: string }[]): Players => {
-  console.log(players);
   console.log(choices)
   switch (true) {
     case (choices[0].choice === choices[1].choice):
@@ -127,7 +107,6 @@ const initialState: Store = {
 };
 
 export const setUsername = createEvent<string>();
-export const addPlayer = createEvent();
 export const setPlayers = createEvent<string[]>();
 export const playerDisconnected = createEvent<string>();
 export const bothMadeChoice = createEvent<{ username: string, choice: string }[]>();
@@ -135,13 +114,6 @@ export const bothMadeChoice = createEvent<{ username: string, choice: string }[]
 
 export default createStore<Store>(initialState)
   .on(setUsername, (state, newPlayerName) => ({ ...state, newPlayerName }))
-  // .on(addPlayer, (state) => {
-  //   return ({
-  //     ...state,
-  //     players: addNewPlayer(state, state.newPlayerName),
-  //     newPlayerName: '',
-  //   })
-  // })
   .on(setPlayers, (state, players) => ({
     ...state,
     players: addPlayers(state, players)

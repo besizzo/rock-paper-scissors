@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { Container, InputLabel, Input, Button } from './styles';
 import { useStore } from 'effector-react';
-import $store, { setUsername, addPlayer } from '../../store';
+import $store, { setUsername } from '../../store';
 
 export const ChooseName = ({
-  isLogged,
   setIsLogged,
 }: {
   isLogged: boolean;

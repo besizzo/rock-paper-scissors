@@ -3,7 +3,6 @@ import { Container, Option, OptionWrapper } from './styles';
 import rock from '../../shared/images/rock.png';
 import paper from '../../shared/images/paper.png';
 import scissors from '../../shared/images/scissors.png';
-import io from 'socket.io-client';
 
 export const GameOptions = ({
   socket,

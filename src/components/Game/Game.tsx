@@ -7,42 +7,37 @@ import { GameOptions } from '../GameOptions';
 
 import { useStore } from 'effector-react';
 import $store, {
-  setUsername,
-  addPlayer,
   setPlayers,
   playerDisconnected,
   bothMadeChoice,
 } from '../../store';
 
-const socketURL = 'https://front-task-rps-4.herokuapp.com/';
+const SOCKET_URL = 'https://front-task-rps-4.herokuapp.com/';
 
 export const Game = () => {
   const socketRef = useRef({});
   const store = useStore($store);
 
   useEffect(() => {
-    const socket = io(socketURL, {
+    const socket = io(SOCKET_URL, {
       query: {
         username: store.newPlayerName,
       },
     });
     socketRef.current = socket;
+    // (socketRef.current as any) instead of regular socket does not help to prevent double emmition from the server side
     socket.on('connected', (player) => {
-      console.log('player conntected: ', player); // ['Player_1_name', 'Player_2_name']
+      console.log('player conntected: ', player);
     });
     socket.emit('get_players');
-    socket.on('players_received', (players) =>
-      // console.log('those are:', payload),
-      setPlayers(players),
-    );
+    socket.on('players_received', (players) => setPlayers(players));
     socket.on('disconnected', (playerName: { username: string }) => {
       playerDisconnected(playerName.username);
     });
     socket.on('game_finished', (payload) => {
-      console.log('FINISHED');
       bothMadeChoice(payload.results);
     });
-    // console.log('state of players: ', store.players);
+    socket.on('Error', (error) => console.log(error));
   }, []);
 
   return (

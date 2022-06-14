@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 import { GameText } from '../GameText';
-import rock from '../../shared/images/rock.png';
 import dots from '../../shared/images/dots.svg';
-import circle from '../../shared/images/dots-circle.svg';
 
 const Container = styled.div`
   flex-grow: 1;
@@ -14,7 +12,6 @@ const Wrapper = styled.div`
 `;
 
 const EnemyPick = styled.div`
-  /* background-color: lightblue; */
   padding: 20px;
   margin: auto;
 `;
