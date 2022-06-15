@@ -3,18 +3,27 @@ import { Container, Option, OptionWrapper } from './styles';
 import rock from '../../shared/images/rock.png';
 import paper from '../../shared/images/paper.png';
 import scissors from '../../shared/images/scissors.png';
+import $store, { playerMadeChoice, Choice } from '../../store';
+import { useStore } from 'effector-react';
 
-export const GameOptions = ({
-  socket,
-}: {
-  socket: React.MutableRefObject<{}>;
-}) => {
-  const handleChooseOption = (name: string) => {
-    console.log('option is ', name);
-    (socket.current as any).emit('choose', name);
+type OptionObj = {
+  id: number;
+  name: Choice;
+  img: string;
+};
+
+export const GameOptions = ({ socket }: { socket: any }) => {
+  const store = useStore($store);
+  const isBothConnected =
+    store.players.playerOne.name && store.players.playerTwo.name;
+  const isShowingResults = Boolean(store.currentRoundWinner);
+
+  const handleChooseOption = (choice: Choice) => {
+    socket.current.emit('choose', choice);
+    playerMadeChoice(choice);
   };
 
-  const options = [
+  const options: OptionObj[] = [
     {
       id: 1,
       name: 'rock',
@@ -36,6 +45,7 @@ export const GameOptions = ({
     <Container>
       {options.map((option) => (
         <OptionWrapper
+          disabled={!isBothConnected || isShowingResults}
           onClick={() => handleChooseOption(option.name)}
           key={option.id}>
           <Option src={option.img} />

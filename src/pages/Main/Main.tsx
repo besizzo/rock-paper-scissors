@@ -1,7 +1,8 @@
-import { useState } from 'react';
 import { ChooseName } from '../../components/ChooseName';
 import { Game } from '../../components/Game';
 import styled from '@emotion/styled';
+import { useStore } from 'effector-react';
+import $store from '../../store';
 
 const Container = styled.div`
   display: flex;
@@ -11,20 +12,10 @@ const Container = styled.div`
   max-width: 400px;
   height: 100%;
   max-height: 620px;
+  position: relative;
 `;
 
 export const Main = () => {
-  const [isLogged, setIsLogged] = useState(false);
-
-  return (
-    <>
-      <Container>
-        {!isLogged ? (
-          <ChooseName isLogged={isLogged} setIsLogged={setIsLogged} />
-        ) : (
-          <Game />
-        )}
-      </Container>
-    </>
-  );
+  const store = useStore($store);
+  return <Container>{store.isLogged ? <Game /> : <ChooseName />}</Container>;
 };

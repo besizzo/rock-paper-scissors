@@ -4,6 +4,7 @@ import { Container } from './styles';
 import { Scoreboard } from '../Scoreboard';
 import { Gameboard } from '../Gameboard';
 import { GameOptions } from '../GameOptions';
+import { MatchResults } from '../MatchResults';
 
 import { useStore } from 'effector-react';
 import $store, {
@@ -25,10 +26,7 @@ export const Game = () => {
       },
     });
     socketRef.current = socket;
-    // (socketRef.current as any) instead of regular socket does not help to prevent double emmition from the server side
-    socket.on('connected', (player) => {
-      console.log('player conntected: ', player);
-    });
+
     socket.emit('get_players');
     socket.on('players_received', (players) => setPlayers(players));
     socket.on('disconnected', (playerName: { username: string }) => {
@@ -45,6 +43,7 @@ export const Game = () => {
       <Container>
         <Scoreboard />
         <Gameboard />
+        {store.currentRoundWinner && <MatchResults socket={socketRef} />}
         <GameOptions socket={socketRef} />
       </Container>
     </>
